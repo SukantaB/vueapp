@@ -1,0 +1,10 @@
+.home{
+}
+.add-task{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.button-home{
+    margin-left: 2px;
+}
