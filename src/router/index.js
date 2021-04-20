@@ -6,7 +6,7 @@ import Task from '../views/Task/Task.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: Home
   },

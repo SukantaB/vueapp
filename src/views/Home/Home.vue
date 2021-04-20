@@ -5,7 +5,7 @@
             :onChange="setTaskName"
             :value="taskname"
         />
-        <Button text="Add Task" classname="button-home" :onAddTask="onAddTask" />
+        <Button text="Add Task" classname="button-home" :onSubmit="onAddTask" />
     </div>
     <div>
         <List :newtasks="newtasks" :completedtasks="completedtasks"/>

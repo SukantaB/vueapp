@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import {getCurrentList, deleteTask, updateTask, addTask } from "./actions"
+import {getCurrentList, deleteTask, updateTask, addTask , signin, signout, signup } from "./actions"
 
 
 // state.commit for mutation , state.dispatch for actions
@@ -10,7 +10,11 @@ export default createStore({
         tasklist : ([{name: "Tast 1", description : "Task 1 Description", id: "1", status:"completed"}, {name: "Tast 2", description : "Task 2 Description", id: "2", status:"new"}]),
         notification : { 
             show: false,
-            info : ""
+            info : "",
+        },
+        user: {
+            id : "",
+            login : false
         }
     }),
     mutations: { 
@@ -29,6 +33,9 @@ export default createStore({
         _clearnotification : (state) => {
             state.notification.show = false
             state.notification.info = ""
+        },
+        _user : (state, payload) => {
+            state.user = payload
         }
     },
     actions: {
@@ -37,6 +44,9 @@ export default createStore({
         deleteTask,
         updateTask,
         addTask,
+        signin, 
+        signout, 
+        signup
     },
     modules: {},
     getters :{
@@ -48,6 +58,9 @@ export default createStore({
         },
         getnotificaiton : (state) => {
             return state.notification
-        }
+        },
+        getuser : (state) => {
+            return state.user
+        },
     }
 })

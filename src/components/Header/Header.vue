@@ -5,8 +5,7 @@
       <span class="block text-2xl ml-4"> {{tittle}} </span> 
     </div>
     <div class="flex">
-      <router-link to="/task"> <span class="mr-2"> Community Chat </span> </router-link>
-      <router-link to="/login"> Login </router-link>
+      <span @click="logout()" class="cursor-pointer mr-2 underline"> Logout </span>
     </div>
   </div>
 </template>

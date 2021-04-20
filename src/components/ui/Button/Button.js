@@ -1,11 +1,11 @@
 export default {
     name: 'button-component',
     methods: {
-        onClick() {  this.onAddTask() }
+        onClick() {this.onSubmit() }
     },
     props: {
         text: String,
         classname: String,
-        onAddTask: Function
+        onSubmit: Function
     }
   }

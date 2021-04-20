@@ -15,7 +15,7 @@ export default {
     methods: {
         onAddTask() {
             const taskname = this.taskname;
-            if(!taskname) return this.$store.commit("_togglenotification", [{show: true, info: "Task name can not be empty."}]);
+            if(!taskname) return this.$store.commit("_togglenotification", {show: true, info: "Task name can not be empty."});
             const tasks = this.$store.getters.gettasklist
             this.$store.dispatch("addTask", [...tasks, {name: taskname, description: "", id: "2" , status: "new"}] );
             this.taskname = ""
