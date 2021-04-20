@@ -13,9 +13,8 @@ export default {
         onDrop(e, zone){
             const id = e.dataTransfer.getData("id");
             const tasks = this.$store.getters.gettasklist;
-            const index = tasks.findIndex(l => l.id == id);
-            tasks[index].status = zone
-            this.$store.commit("_tasklist", tasks )
+            const task = tasks.find(l => l.id == id);
+            this.$store.dispatch("updateTask", {...task, status: zone , userid: this.$store.getters.getuser.id} )
         }
     },
 }

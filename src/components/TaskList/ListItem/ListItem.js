@@ -6,11 +6,10 @@ export default{
         id: String
     },
     methods: {
-        onClick(id){ this.$router.push({ name: 'task', params: { id } }) },
+        onClick(){ console.log("hit") },
         onDelete(e, id){ 
             e.stopPropagation();
-            const tasks = this.$store.getters.gettasklist.filter(t => t.id !== id);
-            this.$store.commit("_tasklist", tasks)
+            this.$store.dispatch("deleteTask", {id, userid: this.$store.getters.getuser.id})
         },
         ondragEnd(...arg){console.log(arg)},
         ondragStart(e, id){

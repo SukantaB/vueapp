@@ -28,16 +28,20 @@
     beforeMount(){
       const router = useRouter();
       const route = useRoute();
+        this.$store.commit("_togglespinnig",true)
         firebase.auth().onAuthStateChanged(user => {
           if(!user) {
             this.$store.commit("_user", {id : "", login: false})
-            router.replace("/login")
+            router.replace("/login");
+            this.$store.commit("_togglespinnig",false)
             return
           }
           else if(route.path === "/login" || route.path === "/signup" || route.path=="/"){ 
             router.replace("/home");
           }
           this.$store.commit("_user", {id : user.uid, login: true})
+          this.$store.dispatch("getCurrentList", user.uid);
+          this.$store.commit("_togglespinnig",false)
         })  
     },
     computed:{

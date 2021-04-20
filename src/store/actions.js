@@ -1,36 +1,67 @@
 import { firebase } from "../utils/Firebase"
 
 
-export const getCurrentList =  async (state) => {
+export const getCurrentList =  async (state, payload) => {
     try{
-        state.commit("_togglespinnig",true)
-        state.commit("_tasklist", [])
+        state.commit("_togglespinnig",true);
+        const db = firebase.firestore()
+        const data = await db
+                            .collection("tasks")
+                            .where("user", "==", payload)
+                            .get()
+        state.commit("_tasklist", data.docs.map(d=> ({...d.data(), id : d.id})))
     }
-    catch(err){console.log(err)}
+    catch(err){
+        state.commit("_togglespinnig",false)
+        state.commit("_togglenotification", {show: true, info: err.message})
+    }
 }
 
-export const deleteTask =  async (state) => {
+export const deleteTask =  async (state, payload) => {
     try{
         state.commit("_togglespinnig",true)
-        state.commit("_tasklist", [])
+        const db = firebase.firestore()
+        await db
+            .collection("tasks")
+            .doc(payload.id)
+            .delete()
+        state.dispatch("getCurrentList", payload.userid);
     }
-    catch(err){console.log(err)}
+    catch(err){
+        state.commit("_togglespinnig",false)
+        state.commit("_togglenotification", {show: true, info: err.message})
+    }
 }
 
-export const updateTask = async (state) => {
+export const updateTask = async (state, payload) => {
     try{
         state.commit("_togglespinnig",true)
-        state.commit("_tasklist", [])
+        const db = firebase.firestore()
+        await db
+            .collection("tasks")
+            .doc(payload.id)
+            .set({name: payload.name, status: payload.status, description: "", user: payload.userid})
+        state.dispatch("getCurrentList", payload.userid);
     }
-    catch(err){console.log(err)}
+    catch(err){
+        state.commit("_togglespinnig",false)
+        state.commit("_togglenotification", {show: true, info: err.message})
+    }
 }
 
 export const addTask = async (state, payload) => {
     try{
         state.commit("_togglespinnig",true);
-        state.commit("_tasklist", payload);
+        const db = firebase.firestore()
+        await db
+            .collection("tasks")
+            .add({name: payload.name, status: "new", description: "", user: payload.userid})
+        state.dispatch("getCurrentList", payload.userid);
     }
-    catch(err){console.log(err)}
+    catch(err){
+        state.commit("_togglespinnig",false)
+        state.commit("_togglenotification", {show: true, info: err.message})
+    }
 }
 
 export const signup = async (state, payload) => {
@@ -39,7 +70,8 @@ export const signup = async (state, payload) => {
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then(data => {
-            state.commit("_user", {id: data.uid, login: true })
+            console.log(data);
+            // state.commit("_user", {id: data.uid, login: true })
             state.commit("_togglespinnig",false)
         })
         .catch(err =>  {
@@ -55,7 +87,7 @@ export const signin = async (state, payload) => {
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(data => {
             console.log(data);
-            state.commit("_user", {id: data.uid, login: true })
+            // state.commit("_user", {id: data.uid, login: true })
             state.commit("_togglespinnig",false)
         })        
         .catch(err =>  {
@@ -70,7 +102,7 @@ export const signout = async (state, ) => {
         .auth()
         .signOut()
         .then(() =>{
-            state.commit("_user", {id: "", login: false })
+            // state.commit("_user", {id: "", login: false })
             state.commit("_togglespinnig",false)
         })
         .catch(err =>  {

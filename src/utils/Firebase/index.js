@@ -1,5 +1,4 @@
 import _ from "firebase";
-
 export const init  = () => {
   _.initializeApp({
       apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
@@ -11,5 +10,4 @@ export const init  = () => {
       measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID
     })
 }
-
 export const  firebase = _

@@ -7,7 +7,7 @@ import {getCurrentList, deleteTask, updateTask, addTask , signin, signout, signu
 export default createStore({
     state: () => ({
         spinning: false,
-        tasklist : ([{name: "Tast 1", description : "Task 1 Description", id: "1", status:"completed"}, {name: "Tast 2", description : "Task 2 Description", id: "2", status:"new"}]),
+        tasklist : [],
         notification : { 
             show: false,
             info : "",
