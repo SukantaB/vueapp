@@ -15,6 +15,11 @@ export default {
             const tasks = this.$store.getters.gettasklist;
             const task = tasks.find(l => l.id == id);
             this.$store.dispatch("updateTask", {...task, status: zone , userid: this.$store.getters.getuser.id} )
+        },
+        onCheck(e, id){
+            const tasks = this.$store.getters.gettasklist;
+            const task = tasks.find(l => l.id == id);
+            this.$store.dispatch("updateTask", {...task, status: task.status === "new" ? "completed" : "new" , userid: this.$store.getters.getuser.id} )
         }
     },
 }

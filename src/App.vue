@@ -37,7 +37,7 @@
             return
           }
           else if(route.path === "/login" || route.path === "/signup" || route.path=="/"){ 
-            router.replace("/home");
+            router.replace("/");
           }
           this.$store.commit("_user", {id : user.uid, login: true})
           this.$store.dispatch("getCurrentList", user.uid);

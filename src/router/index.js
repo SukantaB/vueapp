@@ -3,10 +3,9 @@ import Home from '../views/Home/Home.vue';
 import Login from '../views/Login/Login.vue';
 import Signup from '../views/Signup/Signup.vue';
 import Task from '../views/Task/Task.vue';
-
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: Home
   },

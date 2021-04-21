@@ -3,7 +3,9 @@ export default{
     props: {
         name : String,
         index: Number,
-        id: String
+        id: String,
+        onCheck: Function,
+        status: String
     },
     methods: {
         onClick(){ console.log("hit") },
@@ -18,4 +20,9 @@ export default{
             e.dataTransfer.setData("id", id)
         }
     },
+    computed:{
+        checked(){
+            return this.status === "new" ? false : true
+        }
+    }
 }
