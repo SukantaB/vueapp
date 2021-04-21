@@ -1,11 +1,9 @@
 <template>
-    <div class="background-container" >
       <Loader />
       <Header v-if="loggedin" tittle="Tasker" />
       <Notification />
       <router-view />
       <Footer />
-    </div>
 </template>
 
 <script>
@@ -41,6 +39,7 @@
           }
           this.$store.commit("_user", {id : user.uid, login: true})
           this.$store.dispatch("getCurrentList", user.uid);
+          this.$store.dispatch("getMessage");
           this.$store.commit("_togglespinnig",false)
         })  
     },
@@ -53,6 +52,7 @@
 <style>
 body{
   margin: 0;
+  height: 100vh;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -61,8 +61,7 @@ body{
   background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100vw;
-  height: 100vh;
+
   position: relative;
 }
 </style>

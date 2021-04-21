@@ -1,6 +1,6 @@
 <template>
     <div class="h-full w-full flex justify-center">
-        <div class="flex flex-col mt-20 shadow-2xl p-10 max-h-96 ">
+        <div class="flex flex-col mt-20 shadow-2xl p-10 h-2/4 form-signup">
             <h1 class="text-3xl text-center"> Signup </h1>
             <br/>
             <label> Email: </label>
@@ -8,6 +8,9 @@
             <br/>
             <label> Password:</label>
             <Input :value="password" :onChange="_password" />
+            <br/>
+             <label> Confirm Password:</label>
+            <Input :value="confirmpassword" :onChange="_passwordconfirm" />
             <br/>
             <Button text="Submit" :onSubmit="_onSubmit"  />
             <router-link to="/login"> <span class="block mt-2 text-center text-sm"> Back to login </span></router-link>

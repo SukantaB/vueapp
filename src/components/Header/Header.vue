@@ -1,10 +1,11 @@
 <template>
   <div class="p-5 flex align-middle justify-between"> 
     <div class="flex">
-      <font-awesome-icon icon="home" class="text-3xl ml-2 "/> 
       <span class="block text-2xl ml-4"> {{tittle}} </span> 
     </div>
     <div class="flex">
+      <router-link to="/"><span class="cursor-pointer mr-2 underline"> Home </span> </router-link>
+      <router-link to="/chat"><span class="cursor-pointer mr-2 underline"> Community Chat </span> </router-link>
       <span @click="logout()" class="cursor-pointer mr-2 underline"> Logout </span>
     </div>
   </div>

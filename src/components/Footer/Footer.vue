@@ -1,10 +1,10 @@
 <template>
-    <div class="absolute bottom-10 w-full">
-    <div class="flex justify-center">
-        <span class="text-white"> webapp is not mobile friendly ...</span>
-        <font-awesome-icon icon="fa-github" class="text-3xl ml-2 "/> 
-    </div>
-    </div>
+    <footer class="absolute bottom-0 w-full footer">
+        <svg viewBox="0 -20 700 110" width="100%" class="h-0 md:h-44" preserveAspectRatio="none">
+            <path transform="translate(0, -20)" d="M0,10 c80,-22 240,0 350,18 c90,17 260,7.5 350,-20 v50 h-700" fill="#52d2fb" />
+            <path d="M0,10 c80,-18 230,-12 350,7 c80,13 260,17 350,-5 v100 h-700z" fill="#61C9C9" />
+        </svg>
+    </footer>
 </template>
 
 <script src="./Footer.js"/>

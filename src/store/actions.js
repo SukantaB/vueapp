@@ -1,3 +1,4 @@
+import moment from "moment";
 import { firebase } from "../utils/Firebase"
 
 
@@ -109,4 +110,40 @@ export const signout = async (state, ) => {
             state.commit("_togglespinnig",false);
             state.commit("_togglenotification", {show: true, info: err.message})
         })
+}
+
+export const getMessage = async (state) => {
+    try{
+        const db = firebase.firestore();
+        await db
+            .collection("chats")
+            .limit(50)
+            .onSnapshot(q=> {
+                const data = q.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id,
+                }))
+                .sort((c1,c2) =>{
+                    if ( moment(c1.createdAt).isBefore(c2.createdAt)) return -1
+                    else 1
+                })
+                state.commit("_chats", data)
+            })
+    }
+    catch(err){
+        state.commit("_togglenotification", {show: true, info: err.message})
+    }
+}
+
+export const sendMessage =  async (state, payload) => {
+    try{
+        const db = firebase.firestore();
+        const user = firebase.auth().currentUser
+        await db
+            .collection("chats")
+            .add({sendername: user.email, message: payload.message, sender: user.uid, createdAt: moment().toISOString()})
+    }
+    catch(err){
+        state.commit("_togglenotification", {show: true, info: err.message})
+    }
 }

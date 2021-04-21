@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import {getCurrentList, deleteTask, updateTask, addTask , signin, signout, signup } from "./actions"
+import {getCurrentList, deleteTask, updateTask, addTask , signin, signout, signup, getMessage, sendMessage } from "./actions"
 
 
 // state.commit for mutation , state.dispatch for actions
@@ -8,6 +8,7 @@ export default createStore({
     state: () => ({
         spinning: false,
         tasklist : [],
+        chats:[],
         notification : { 
             show: false,
             info : "",
@@ -36,6 +37,9 @@ export default createStore({
         },
         _user : (state, payload) => {
             state.user = payload
+        },
+        _chats: (state, payload) => {
+            state.chats = payload
         }
     },
     actions: {
@@ -46,7 +50,9 @@ export default createStore({
         addTask,
         signin, 
         signout, 
-        signup
+        signup,
+        getMessage,
+        sendMessage
     },
     modules: {},
     getters :{
@@ -62,5 +68,8 @@ export default createStore({
         getuser : (state) => {
             return state.user
         },
+        getchats: (state) => {
+            return state.chats
+        }
     }
 })

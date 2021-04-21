@@ -1,0 +1,7 @@
+.chat-text{
+    padding: 8px;
+    background-color: rgba(97,201,201, 0.6) ;
+    border-radius: 8px;
+    word-wrap: break-word;
+    width: 320px;
+}

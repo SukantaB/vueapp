@@ -14,6 +14,7 @@ export default {
             const id = e.dataTransfer.getData("id");
             const tasks = this.$store.getters.gettasklist;
             const task = tasks.find(l => l.id == id);
+            if(task.status === zone) return
             this.$store.dispatch("updateTask", {...task, status: zone , userid: this.$store.getters.getuser.id} )
         },
         onCheck(e, id){

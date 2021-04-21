@@ -1,0 +1,4 @@
+.task-name{
+    word-wrap: break-word;
+    width: 100px;
+}
